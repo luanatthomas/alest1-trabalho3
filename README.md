@@ -9,27 +9,18 @@ A primeira etapa do trabalho consiste na escolha da dupla. Os alunos devem se or
 
 # Descrição
 Após a definição da dupla, deverá ser feito um estudo do funcionamento da árvore de pesquisa AVL. A ideia é criar árvores através da inserção de nodos (método add), como no exemplo a seguir. Antes e depois do processo de balanceamento, devem ser chamados o método de caminhamento central.
- 
+ ```
  ABP B;
- 
  B.add(10);
- 
  B.add(6);
- 
  B.add(12);
- 
  B.add(11);
- 
   for(int i=15;i<25;i++)
- 
  B.add(i);
- 
  B.GeraDOT();
- 
  B.ApplyBalancing();
- 
  B.GeraDOT();
- 
+ ```
 Além de testar a árvore com o caminhamento central, o programa deve chamar o método GeraDot que gera o arquivo no formato DOT, do GraphViz, conforme visto em aula. Este arquivo permite a exibição das árvores através de ferramentas como:
 
 • https://dreampuf.github.io/GraphvizOnline
