@@ -15,8 +15,8 @@ Após a definição da dupla, deverá ser feito um estudo do funcionamento da á
  B.add(6);
  B.add(12);
  B.add(11);
-  for(int i=15;i<25;i++)
- B.add(i);
+ for(int i=15;i<25;i++)
+   B.add(i);
  B.GeraDOT();
  B.ApplyBalancing();
  B.GeraDOT();
