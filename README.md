@@ -1,7 +1,7 @@
 # Algoritmos e Estruturas de Dados I
 ## Trabalho 3 - Balanceamento de Árvore de Pesquisa
 
-## Instruções e Objetivo
+### Instruções e Objetivo
 
 O objetivo deste trabalho, que deve ser feito em DUPLA, é o estudo, o entendimento e a implementação do balanceamento em árvores binárias de pesquisa, com base no critério de árvores AVL. Cada dupla deverá fazer todas as tarefas solicitadas a seguir conforme as orientações.
 
