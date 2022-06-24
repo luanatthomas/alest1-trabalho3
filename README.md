@@ -1,4 +1,5 @@
-# Balanceamento de Árvore de Pesquisa
+# Algoritmos e Estruturas de Dados I
+## Trabalho 3 - Balanceamento de Árvore de Pesquisa
 
 ## Instruções e Objetivo
 
