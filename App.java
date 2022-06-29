@@ -20,8 +20,8 @@ public class App {
         }
 
         int op = 0;
-        while(op != 4){
-            System.out.println("\n[1] - Imprimir o GeraDOT \n[2] - Verificar o balanceamento \n[3] - Balancear \n[4] - Sair");
+        while(op != 5){
+            System.out.println("\n[1] - Imprimir o GeraDOT \n[2] - Verificar o balanceamento \n[3] - Balancear \n[4] - Caminhamento central \n[5] - Sair");
             op = sc.nextInt();
             switch (op) {
                 case 1:
@@ -40,6 +40,10 @@ public class App {
                     System.out.println("A árvore foi balanceada!");
                     break;
                 case 4:
+                    LinkedListOfInteger central = bst.positionsCentral();
+                    System.out.println("Caminhamento: " + central.toString());
+                    break;
+                case 5:
                     System.out.println("Valeu sora!");
                     break;
                 default:
