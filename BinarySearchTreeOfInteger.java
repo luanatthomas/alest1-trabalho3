@@ -157,31 +157,34 @@ public class BinarySearchTreeOfInteger {
             return 0;
         }
 
-        int left = 0;
-        int right = 0;
+        int lH = height(n.left);
+        int rH = height(n.right);
 
-        if (n.left == null && n.right == null) {
-            return 0;
-        }
-
-        if (n.left != null) {
-            left = height(n.left);
-        }
-
-        if (n.right != null) {
-            right = height(n.right);
-        }
-
-        if (right > left) {
-            return right + 1;
+        if (lH > rH) {
+            if (n.father == null) {
+                return lH;
+            }
+            return lH + 1;
         } else {
-            return left + 1;
+            if (n.father == null) {
+                return rH;
+            }
+            return rH + 1;
         }
     }
 
-    public void applyBalancing(){
-        if(root != null){
-            applyBalancingAux(root);
+    private int balanceFactor(Node n) {
+        if (n == null) {
+            return 0;
+        }
+        return height(n.left) - height(n.right);
+    }
+
+    public void applyBalancing() {
+        if (root != null) {
+            while (!isBalanced()) {
+                applyBalancingAux(root);
+            }
         }
     }
 
@@ -189,39 +192,59 @@ public class BinarySearchTreeOfInteger {
         if (n == null) {
             return;
         }
-        boolean balanceada = false;
-        while (!balanceada) {
-            balanceada = true;
-            int esqH = height(n.left);
-            int dirH = height(n.right);
-            int difH = esqH - dirH;
+        boolean balanceado = false;
 
-            // EE
-            if (difH > 1) {
-                rotacaoEE(root.left);
-
-                balanceada = false;
+        while (!balanceado) {
+            balanceado = true;
+            // EE e ED
+            if (balanceFactor(n) > 1) {
+                balanceado = false;
+                if (height(n.left) < height(n.right)) {
+                    //ED
+                    rotacaoED(n);
+                }else{
+                    //EE
+                    rotacaoEE(n);
+                }
             }
 
-            // DD
-            if (balanceada) {
-
-                balanceada = false;
-            }
-
-            // ED
-            if (balanceada) {
-
-                balanceada = false;
-            }
-
-            // DE
-            if (balanceada) {
-
-                balanceada = false;
+            // DD e DE
+            if (balanceFactor(n) < -1) {
+                balanceado = false;
+                if (height(n.left) > height(n.right)) {
+                    //DE
+                    rotacaoDE(n);
+                }else{
+                    //DD
+                    rotacaoDD(n);
+                }               
             }
         }
+        applyBalancingAux(n.left);
+        applyBalancingAux(n.right);
+    }
 
+    public boolean isBalanced() {
+        return isBalancedAux(root);
+    }
+
+    private boolean isBalancedAux(Node n) {
+        if (n == null) {
+            return true;
+        }
+
+        boolean nBalanced = true;
+        boolean leftBalenced;
+        boolean rightBalanced;
+
+        if (Math.abs(balanceFactor(n)) > 1) {
+            nBalanced = false;
+        }
+
+        leftBalenced = isBalancedAux(n.left);
+        rightBalanced = isBalancedAux(n.right);
+
+        return leftBalenced && rightBalanced && nBalanced;
     }
 
     private void rotacaoEE(Node n) {
@@ -295,32 +318,6 @@ public class BinarySearchTreeOfInteger {
     private void rotacaoED(Node n) {
         rotacaoEE(n.right);
         rotacaoDD(n);
-    }
-
-    /*
-     * Cada nó numa árvore binária
-     * balanceada (AVL) tem balanceamento
-     * de 1, -1 ou 0.
-     */
-    public boolean isBalanced() {
-        boolean isBalanced = isBalancedAux(root);
-        return isBalanced;
-    }
-
-    private boolean isBalancedAux(Node n) {
-        boolean isBalanced = true;
-        if (n == null) {
-            return isBalanced;
-        }
-        int hL = height(n.left);
-        int hR = height(n.right);
-        if (Math.abs(hL - hR) > 1) {
-            isBalanced = false;
-            return isBalanced;
-        }
-        isBalanced = isBalancedAux(n.left);
-        isBalanced = isBalancedAux(n.right);
-        return isBalanced;
     }
 
     private void GeraConexoesDOT(Node nodo) {

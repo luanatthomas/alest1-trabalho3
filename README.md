@@ -1,5 +1,6 @@
 # Algoritmos e Estruturas de Dados I
 ## Trabalho 3 - Balanceamento de Árvore de Pesquisa
+### Autores - Érico Panassol & Luana Thomas
 
 ### Instruções e Objetivo
 
