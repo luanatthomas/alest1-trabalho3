@@ -199,7 +199,7 @@ public class BinarySearchTreeOfInteger {
             // EE e ED
             if (balanceFactor(n) > 1) {
                 balanceado = false;
-                if (height(n.left) < height(n.right)) {
+                if (height(n.left.left) < height(n.left.right)) {
                     //ED
                     rotacaoED(n);
                 }else{
@@ -211,7 +211,7 @@ public class BinarySearchTreeOfInteger {
             // DD e DE
             if (balanceFactor(n) < -1) {
                 balanceado = false;
-                if (height(n.left) > height(n.right)) {
+                if (height(n.right.left) > height(n.right.right)) {
                     //DE
                     rotacaoDE(n);
                 }else{
