@@ -173,13 +173,19 @@ public class BinarySearchTreeOfInteger {
         }
     }
 
+    // método para verificar qual o fator de balanceamento de um nodo
+    // se > 0, árvore da esquerda é maior
+    // se < 0, árvore da direita é maior
+    // se = 0, as alturas das árvores são iguais
     private int balanceFactor(Node n) {
         if (n == null) {
             return 0;
         }
+
         return height(n.left) - height(n.right);
     }
 
+    // aplica o balanceamento nas árvores
     public void applyBalancing() {
         if (root != null) {
             while (!isBalanced()) {
@@ -193,8 +199,10 @@ public class BinarySearchTreeOfInteger {
             return;
         }
 
-        while (!isBalanced()) {
-            // EE e ED
+        boolean balanceada = false;
+        
+        while (!balanceada) {
+            balanceada = true;
             if (balanceFactor(n) > 1) {
                 if (height(n.left.left) < height(n.left.right)) {
                     // ED
@@ -203,8 +211,9 @@ public class BinarySearchTreeOfInteger {
                     // EE
                     rotacaoEE(n);
                 }
+                balanceada = false;
             }
-
+    
             // DD e DE
             if (balanceFactor(n) < -1) {
                 if (height(n.right.left) > height(n.right.right)) {
@@ -214,13 +223,17 @@ public class BinarySearchTreeOfInteger {
                     // DD
                     rotacaoDD(n);
                 }
+                balanceada = false;
             }
             applyBalancingAux(n.left);
             applyBalancingAux(n.right);
         }
+        
+        return;
 
     }
 
+    // método que verifica se a árvore está balanceada
     public boolean isBalanced() {
         return isBalancedAux(root);
     }
