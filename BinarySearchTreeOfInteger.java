@@ -192,36 +192,33 @@ public class BinarySearchTreeOfInteger {
         if (n == null) {
             return;
         }
-        boolean balanceado = false;
 
-        while (!balanceado) {
-            balanceado = true;
+        while (!isBalanced()) {
             // EE e ED
             if (balanceFactor(n) > 1) {
-                balanceado = false;
                 if (height(n.left.left) < height(n.left.right)) {
-                    //ED
+                    // ED
                     rotacaoED(n);
-                }else{
-                    //EE
+                } else {
+                    // EE
                     rotacaoEE(n);
                 }
             }
 
             // DD e DE
             if (balanceFactor(n) < -1) {
-                balanceado = false;
                 if (height(n.right.left) > height(n.right.right)) {
-                    //DE
+                    // DE
                     rotacaoDE(n);
-                }else{
-                    //DD
+                } else {
+                    // DD
                     rotacaoDD(n);
-                }               
+                }
             }
+            applyBalancingAux(n.left);
+            applyBalancingAux(n.right);
         }
-        applyBalancingAux(n.left);
-        applyBalancingAux(n.right);
+
     }
 
     public boolean isBalanced() {
@@ -274,8 +271,6 @@ public class BinarySearchTreeOfInteger {
             } else if (esquerda.father.left == n) {
                 esquerda.father.left = esquerda;
             }
-        } else {
-
         }
     }
 
@@ -311,13 +306,13 @@ public class BinarySearchTreeOfInteger {
     }
 
     private void rotacaoDE(Node n) {
-        rotacaoDD(n.left);
-        rotacaoEE(n);
+        rotacaoEE(n.right);
+        rotacaoDD(n);
     }
 
     private void rotacaoED(Node n) {
-        rotacaoEE(n.right);
-        rotacaoDD(n);
+        rotacaoDD(n.left);
+        rotacaoEE(n);
     }
 
     private void GeraConexoesDOT(Node nodo) {
